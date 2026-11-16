@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha História em Quadrinhos</title>
+    <style>
+        /* Estilos Gerais e Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Trebuchet MS', sans-serif;
+            background-color: #f4f1ea;
+            background-image: radial-gradient(#d3cfc7 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: #111;
+            padding: 20px 10px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #ffde00;
+            border: 4px solid #000;
+            box-shadow: 6px 6px 0px #000;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Container Principal da HQ */
+        .hq-container {
+            max-width: 750px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* Estilo de cada Quadro (Cena) */
+        .quadro {
+            background-color: #fff;
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0px #000;
+            padding: 15px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .numero-cena {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            background-color: #ff3b30;
+            color: #fff;
+            font-weight: bold;
+            padding: 5px 12px;
+            border: 3px solid #000;
+            font-size: 1rem;
+            z-index: 2;
+        }
+
+        /* Imagem da Cena */
+        .quadro img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 3px solid #000;
+            background-color: #eee; /* Fundo caso a imagem demore a carregar */
+        }
+
+        /* Área dos Balões de Diálogo */
+        .dialogos-area {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Estilo do Balão de Fala */
+        .balao {
+            position: relative;
+            background: #ffffff;
+            border: 3px solid #000000;
+            border-radius: 20px;
+            padding: 12px 18px;
+            font-size: 1.05rem;
+            line-height: 1.4;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+            max-width: 90%;
+        }
+
+        /* Balão alinhado à esquerda (Personagem 1) */
+        .balao.esquerda {
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        /* Balão alinhado à direita (Personagem 2) */
+        .balao.direita {
+            align-self: flex-end;
+            background-color: #e3f2fd;
+            border-bottom-right-radius: 2px;
+        }
+
+        /* Caixa de Narração (Narrador) */
+        .narrador {
+            background-color: #fff59d;
+            border: 3px solid #000;
+            padding: 10px 15px;
+            font-style: italic;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+        }
+
+        .personagem-nome {
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #555;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* Botão de Áudio */
+        .btn-ouvir {
+            align-self: flex-end;
+            background-color: #4cd964;
+            color: #000;
+            border: 3px solid #000;
+            padding: 10px 18px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #000;
+            transition: transform 0.1s, box-shadow 0.1s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+        }
+
+        .btn-ouvir:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        .btn-ouvir.falando {
+            background-color: #ff9500;
+        }
+
+        /* Responsividade para Celulares */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+            .quadro {
+                padding: 10px;
+                box-shadow: 5px 5px 0px #000;
+            }
+            .balao {
+                max-width: 95%;
+                font-size: 0.95rem;
+            }
+            .btn-ouvir {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Título da Minha HQ</h1>
+    </header>
+
+    <main class="hq-container">
+
+        <!-- ================= CENA 1 ================= -->
+        <article class="quadro" id="cena-1">
+            <span class="numero-cena">1</span>
+            <img src="imagens/cena1.png" alt="Cena 1 da história">
+            
+            <div class="dialogos-area">
+                <div class="narrador">
+                    <p>Era uma manhã tranquila na cidade, até que algo inesperado aconteceu...</p>
+                </div>
+                <div class="balao esquerda">
+                    <span class="personagem-nome">Personagem A</span>
+                    <p>Você ouviu esse barulho vindo lá de fora?</p>
+                </div>
+            </div>
+
+            <button class="btn-ouvir" onclick="lerCena('cena-1', this)">🔊 Ouvir</button>
+        </article>
+
+        <!-- ================= CENA 2 ================= -->
+        <article class="quadro" id="cena-2">
+            <span class="numero-cena">2</span>
+            <img src="imagens/cena2.png" alt="Cena 2 da história">
+            
+            <div class="dialogos-area">
+                <div class="balao direita">
+                    <span class="personagem-nome">Personagem B</span>
+                    <p>Sim! Parece que veio do laboratório antigo. Vamos dar uma olhada!</p>
+                </div>
+            </div>
+
+            <button class="btn-ouvir" onclick="lerCena('cena-2', this)">🔊 Ouvir</button>
+        </article>
+
+        <!-- ================= CENA 3 ================= -->
+        <article class="quadro" id="cena-3">
+            <span class="numero-cena">3</span>
+            <img src="imagens/cena3.png" alt="Cena 3 da história">
+            
+            <div class="dialogos-area">
+                <div class="balao esquerda">
+                    <span class="personagem-nome">Personagem A</span>
+                    <p>Olha aquela luz brilhante perto da mesa!</p>
+                </div>
+                <div class="balao direita">
+                    <span class="personagem-nome">Personagem B</span>
+                    <p>Cuidado, não chegue tão perto ainda.</p>
+                </div>
+            </div>
+
+            <button class="btn-ouvir" onclick="lerCena('cena-3', this)">🔊 Ouvir</button>
+        </article>
+
+        <!-- ================= CENA 4 ================= -->
+        <article class="quadro" id="cena-4">
+            <span class="numero-cena">4</span>
+            <img src="imagens/cena4.png" alt="Cena 4 da história">
+            
+            <div class="dialogos-area">
+                <div class="narrador">
+                    <p>De repente, o objeto misterioso começou a flutuar no ar.</p>
+                </div>
+                <div class="balao esquerda">
+                    <span class="personagem-nome">Personagem A</span>
+                    <p>Incrível! É um mapa estelar holográfico!</p>
+                </div>
+            </div>
+
+            <button class="btn-ouvir" onclick="lerCena('cena-4', this)">🔊 Ouvir</button>
+        </article>
+
+        <!-- ================= CENA 5 ================= -->
+        <article class="quadro" id="cena-5">
+            <span class="numero-cena">5</span>
+            <img src="imagens/cena5.png" alt="Cena 5 da história">
+            
+            <div class="dialogos-area">
+                <div class="balao direita">
+                    <span class="personagem-nome">Personagem B</span>
+                    <p>Isso significa que a nossa verdadeira aventura está apenas começando!</p>
+                </div>
+            </div>
+
+            <button class="btn-ouvir" onclick="lerCena('cena-5', this)">🔊 Ouvir</button>
+        </article>
+
+    </main>
+
+    <script>
+        let botaoAtual = null;
+
+        function lerCena(idCena, botao) {
+            // Verifica se o navegador suporta síntese de voz
+            if (!('speechSynthesis' in window)) {
+                alert('Desculpe, seu navegador não suporta a leitura de áudio.');
+                return;
+            }
+
+            // Se já estiver falando, para a leitura atual
+            if (window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+                resetarBotoes();
+                
+                // Se clicou no mesmo botão que já estava tocando, apenas para
+                if (botaoAtual === botao) {
+                    botaoAtual = null;
+                    return;
+                }
+            }
+
+            // Pega todos os parágrafos (<p>) dentro da área de diálogos da cena clicada
+            const cena = document.getElementById(idCena);
+            const paragrafos = cena.querySelectorAll('.dialogos-area p');
+            
+            let textoCompleto = '';
+            paragrafos.forEach(p => {
+                textoCompleto += p.innerText + ' ';
+            });
+
+            if (textoCompleto.trim() === '') return;
+
+            // Configura a voz em Português
+            const fala = new SpeechSynthesisUtterance(textoCompleto);
+            fala.lang = 'pt-BR';
+            fala.rate = 1.0; // Velocidade normal
+            fala.pitch = 1.0; // Tom normal
+
+            // Atualiza visual do botão enquanto fala
+            botao.classList.add('falando');
+            botao.innerHTML = '⏹️ Parar';
+            botaoAtual = botao;
+
+            // Quando terminar de falar, volta o botão ao normal
+            fala.onend = function() {
+                resetarBotoes();
+                botaoAtual = null;
+            };
+
+            fala.onerror = function() {
+                resetarBotoes();
+                botaoAtual = null;
+            };
+
+            // Inicia a leitura
+            window.speechSynthesis.speak(fala);
+        }
+
+        function resetarBotoes() {
+            const todosBotoes = document.querySelectorAll('.btn-ouvir');
+            todosBotoes.forEach(btn => {
+                btn.classList.remove('falando');
+                btn.innerHTML = '🔊 Ouvir';
+            });
+        }
+    </script>
+
+</body>
+</html>
